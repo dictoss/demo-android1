@@ -24,58 +24,53 @@ data class MyJsonData (
 
 class DashboardViewModel : ViewModel() {
 
-    private val _items : MutableLiveData<List<MyItem>> by lazy {loadItems()}
-
+    private val _items : MutableLiveData<List<MyItem>> = MutableLiveData<List<MyItem>>()
     val items : LiveData<List<MyItem>> = _items
 
     private val connectTimeoutMill : Long = 10 * 1000
     private val readTimeoutMill : Long = 10 * 1000
 
-    private val httpClient = OkHttpClient.Builder()
-        .connectTimeout(
-            connectTimeoutMill,
-            java.util.concurrent.TimeUnit.MILLISECONDS
-        )
-        .readTimeout(
-            readTimeoutMill,
-            java.util.concurrent.TimeUnit.MILLISECONDS)
-        .build()
-
-    private fun loadItems() :
-        MutableLiveData<List<MyItem>>
+    fun loadItems()
     {
-        // Do an asynchronous operation to fetch users.
-        var dataset : MutableList<MyItem>? = mutableListOf<MyItem>()
-
-        //for (i in 0..5) {
-        //    var data : MyItem = MyItem("title" + i, "datetime" + i)
-        //    dataset?.add(data)
-        //}
-        //return MutableLiveData(dataset)
-
         try {
             // Requestを作成
-            val targetUri : String = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_list.json"
-            //val targetUri : String = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_1.json"
+            val targetUri: String = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_list.json"
+
+            val httpClient = OkHttpClient.Builder()
+                .connectTimeout(
+                    connectTimeoutMill,
+                    java.util.concurrent.TimeUnit.MILLISECONDS
+                )
+                .readTimeout(
+                    readTimeoutMill,
+                    java.util.concurrent.TimeUnit.MILLISECONDS)
+                .build()
+
             val request = Request.Builder()
                 .url(targetUri)
                 .build()
 
+            // 非同期処理でHTTP通信を行う
             var call = httpClient.newCall(request).enqueue(object : Callback {
+
+                // 正常応答時
                 override fun onResponse(call: Call, response: Response) {
                     // Responseの読み出し
                     val responseBody = response.body?.string().orEmpty()
-                    // 必要に応じてCallback
-                    // レスポンスデータの応答
+
+                    // レスポンスデータの取得
                     val jsonObj = Json.decodeFromString<List<MyJsonData>>(responseBody)
+                    var dataset = mutableListOf<MyItem>()
+
                     for (i in jsonObj) {
-                        var data : MyItem = MyItem(i.title, i.update_date)
+                        var data: MyItem = MyItem(i.title, i.update_date)
                         dataset?.add(data)
                     }
-                    //var data : MyItem = MyItem(jsonObj.title, jsonObj.update_date)
-                    //dataset?.add(data)
+
+                    _items.postValue(dataset)
                 }
 
+                // エラー応答時
                 override fun onFailure(call: Call, e: IOException) {
                     Log.e("Error", e.toString())
                     // 必要に応じてCallback
@@ -86,7 +81,5 @@ class DashboardViewModel : ViewModel() {
         } finally {
             //
         }
-
-        return MutableLiveData(dataset)
     }
 }

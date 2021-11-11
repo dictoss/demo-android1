@@ -30,25 +30,31 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // RecyclerView
         var rv : RecyclerView? = binding.dashboardRecyclerView
-
         rv?.setHasFixedSize(true)
         rv?.layoutManager = LinearLayoutManager(this.requireContext())
 
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dashboardViewModel =
+            ViewModelProvider(this).get(DashboardViewModel::class.java)
+
         dashboardViewModel.items.observe(viewLifecycleOwner, Observer<List<MyItem>> { items ->
+            var rv : RecyclerView? = binding.dashboardRecyclerView
             // set data RecyclerView.
             //rv?.adapter = MyItemAdapter(emptyList())
             rv?.adapter = MyItemAdapter(items)
         })
 
-        return root
+        dashboardViewModel.loadItems()
     }
 
     override fun onDestroyView() {
