@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="WebView Config">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="switch_preference_webview_use_javascript"
+            android:title="Use Javascript" />
+        <EditTextPreference
+            android:defaultValue="http://www.pcdennokan.wjg.jp/site/top/"
+            android:key="edit_text_preference_webview_openurl"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Edit open URL" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Video Config">
+
+        <EditTextPreference
+            android:defaultValue="https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"
+            android:key="edit_text_preference_video_mpd_url"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Edit mpd file URL" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
