@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -48,13 +50,26 @@ class DashboardFragment : Fragment() {
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         dashboardViewModel.items.observe(viewLifecycleOwner, Observer<List<MyItem>> { items ->
+            //
+            // ここは画面を縦と横を変更するともこの処理が再度実行される。
+            //
+            binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+
             var rv : RecyclerView? = binding.dashboardRecyclerView
             // set data RecyclerView.
             //rv?.adapter = MyItemAdapter(emptyList())
             rv?.adapter = MyItemAdapter(items)
-        })
 
-        dashboardViewModel.loadItems()
+            // notify message
+            val text = "List load done."
+            val duration = Toast.LENGTH_SHORT
+
+            val toast = Toast.makeText(this.requireContext(), text, duration)
+            toast.show()
+        })
+        
+        dashboardViewModel.beginLoadItems()
+        binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
     }
 
     override fun onDestroyView() {

@@ -7,13 +7,28 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MyItem (_title: String, _datetime: String){
+class MyItem (
+    _c_id: Int,
+    _title: String,
+    _content: String,
+    _image_1: String,
+    _create_date: String,
+    _update_date: String,
+){
+    var c_id : Int? = 0
     var title : String? = ""
-    var datetime : String? = ""
+    var content : String? = ""
+    var image_1 : String? = ""
+    var create_date : String? = ""
+    var update_date : String? = ""
 
     init {
+        c_id = _c_id
         title = _title
-        datetime = _datetime
+        content = _content
+        image_1 = _image_1
+        create_date = _create_date
+        update_date = _update_date
     }
 }
 
@@ -53,7 +68,7 @@ class MyItemAdapter (private val dataSet: List<MyItem>) :
         val item: MyItem? = dataSet[position]
 
         viewHolder.titleView.text = item?.title
-        viewHolder.datetimeView.text = item?.datetime
+        viewHolder.datetimeView.text = item?.update_date
 
         viewHolder.itemView.setOnClickListener {
             // 行をタップしたときに詳細画面を開きます
