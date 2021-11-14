@@ -1,0 +1,6 @@
+<resources>
+    <!-- application message -->
+    <string name="mainactivity_button_msgbox_desu_title">ダイアログタイトル</string>
+    <string name="mainactivity_button_msgbox_desu_msg">これはダイアログのメッセージです。</string>
+    <string name="dashboard_load_done">リストの読み込みが完了しました。</string>
+</resources>

@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         Log.i("TAG","abcd.")
 
         val builder: AlertDialog.Builder? = AlertDialog.Builder(this)
-        builder?.setMessage("ダイアログメッセージです！")
-        builder?.setTitle("ダイアログタイトル")
+        builder?.setTitle(R.string.mainactivity_button_msgbox_desu_title)
+        builder?.setMessage(R.string.mainactivity_button_msgbox_desu_msg)
 
         val dialog: AlertDialog? = builder?.create()
         dialog?.show()

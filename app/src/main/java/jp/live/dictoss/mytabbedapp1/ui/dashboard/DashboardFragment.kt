@@ -61,7 +61,7 @@ class DashboardFragment : Fragment() {
             rv?.adapter = MyItemAdapter(items)
 
             // notify message
-            val text = "List load done."
+            val text = R.string.dashboard_load_done
             val duration = Toast.LENGTH_SHORT
 
             val toast = Toast.makeText(this.requireContext(), text, duration)

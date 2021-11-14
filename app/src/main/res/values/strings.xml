@@ -18,4 +18,9 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- application message -->
+    <string name="mainactivity_button_msgbox_desu_title">Dialog Title</string>
+    <string name="mainactivity_button_msgbox_desu_msg">This is dialog message.</string>
+    <string name="dashboard_load_done">List load done.</string>
 </resources>
