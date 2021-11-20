@@ -54,14 +54,12 @@ class DashboardDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val root: View = binding.root
-        val titleTextView: TextView = root.findViewById(R.id.fragment_detail_textView)
-
         val bundle: Bundle? = arguments
         this.c_id = bundle?.getInt("id")
         this.title = bundle?.getString("title")
 
-        titleTextView.text = this.title
+        val titleTextView: TextView? = this.view?.findViewById(R.id.fragment_detail_textView)
+        titleTextView?.text = this.title
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
