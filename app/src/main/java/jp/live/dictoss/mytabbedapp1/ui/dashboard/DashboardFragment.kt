@@ -58,7 +58,7 @@ class DashboardFragment : Fragment() {
             var rv : RecyclerView? = binding.dashboardRecyclerView
             // set data RecyclerView.
             //rv?.adapter = MyItemAdapter(emptyList())
-            rv?.adapter = MyItemAdapter(items)
+            rv?.adapter = MyItemAdapter(items, this.requireContext(), this)
 
             // notify message
             val text = R.string.dashboard_load_done

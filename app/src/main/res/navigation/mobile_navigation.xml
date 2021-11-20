@@ -15,7 +15,12 @@
         android:id="@+id/navigation_dashboard"
         android:name="jp.live.dictoss.mytabbedapp1.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_dashboardDetailFragment"
+            app:destination="@id/dashboardDetailFragment2"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -28,5 +33,10 @@
         android:name="jp.live.dictoss.mytabbedapp1.ui.video.VideoFragment"
         android:label="Video"
         tools:layout="@layout/fragment_video" />
+    <fragment
+        android:id="@+id/dashboardDetailFragment2"
+        android:name="jp.live.dictoss.mytabbedapp1.DashboardDetailFragment"
+        android:label="@string/title_fragment_dashboard_detail"
+        tools:layout="@layout/fragment_dashboard_detail" />
 
 </navigation>

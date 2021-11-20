@@ -1,11 +1,22 @@
 package jp.live.dictoss.mytabbedapp1
 
+import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
+import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
+import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
+import jp.live.dictoss.mytabbedapp1.MainActivity
+import jp.live.dictoss.mytabbedapp1.placeholder.PlaceholderContent
 
 class MyItem (
     _c_id: Int,
@@ -32,7 +43,8 @@ class MyItem (
     }
 }
 
-class MyItemAdapter (private val dataSet: List<MyItem>) :
+class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Context, private val parentFragment: Fragment) :
+
     RecyclerView.Adapter<MyItemAdapter.ViewHolder>() {
 
     /**
@@ -70,9 +82,23 @@ class MyItemAdapter (private val dataSet: List<MyItem>) :
         viewHolder.titleView.text = item?.title
         viewHolder.datetimeView.text = item?.update_date
 
-        viewHolder.itemView.setOnClickListener {
+
+        viewHolder.itemView.setOnClickListener { itemView ->
             // 行をタップしたときに詳細画面を開きます
-            Log.i("TAG", "clicked item")
+            Log.i("TAG", "clicked item (%d:%S)".format(position, item?.title))
+
+            //val item = itemView.tag as PlaceholderContent.PlaceholderItem
+            val bundle = Bundle()
+            bundle.putInt(
+                "id",
+                position
+            )
+            bundle.putString(
+                "title",
+                item?.title
+            )
+
+            parentFragment.findNavController().navigate(R.id.dashboardDetailFragment2, bundle)
         }
     }
 
