@@ -8,10 +8,7 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.webkit.WebResourceRequest
-import android.widget.PopupMenu
+import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -29,6 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // calling the action bar
+        val actionBar: ActionBar? = supportActionBar
+
+        // showing the back button in action bar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
 
         val navView: BottomNavigationView = binding.navView
 
@@ -60,6 +63,11 @@ class MainActivity : AppCompatActivity() {
                 Log.i("TAG", "IN onOptionsItemSelected()")
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
+                true
+            }
+            android.R.id.home -> {
+                onBackPressed()
+                //supportFragmentManager.popBackStack()
                 true
             }
             else -> super.onOptionsItemSelected(item)
