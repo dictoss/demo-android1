@@ -19,6 +19,17 @@ import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
 import jp.live.dictoss.mytabbedapp1.MainActivity
 import jp.live.dictoss.mytabbedapp1.placeholder.PlaceholderContent
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class JsonMyItem (
+    val c_id: Int,
+    val title: String,
+    val content: String,
+    val image_1: String,
+    val create_date: String,
+    val update_date: String
+)
 
 @Parcelize
 data class MyItem (

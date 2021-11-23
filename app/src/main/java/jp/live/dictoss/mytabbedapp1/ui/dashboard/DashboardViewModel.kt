@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import jp.live.dictoss.mytabbedapp1.JsonMyItem
 import jp.live.dictoss.mytabbedapp1.MyItem
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -14,16 +15,6 @@ import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.*
 import okhttp3.internal.wait
 import okio.IOException
-
-@Serializable
-data class MyJsonData (
-    val c_id: Int,
-    val title: String,
-    val content: String,
-    val image_1: String,
-    val create_date: String,
-    val update_date: String
-)
 
 class DashboardViewModel : ViewModel() {
 
@@ -65,7 +56,7 @@ class DashboardViewModel : ViewModel() {
                     val jsonInst = Json {
                         ignoreUnknownKeys = true
                     }
-                    val jsonObj = jsonInst.decodeFromString<List<MyJsonData>>(responseBody)
+                    val jsonObj = jsonInst.decodeFromString<List<JsonMyItem>>(responseBody)
                     var dataset = mutableListOf<MyItem>()
 
                     for (i in jsonObj) {
