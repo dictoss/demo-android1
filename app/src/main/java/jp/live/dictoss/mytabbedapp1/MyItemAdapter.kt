@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
@@ -82,7 +83,28 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
 
         viewHolder.titleView.text = item?.title
         viewHolder.datetimeView.text = item?.update_date
-        //viewHolder.datetimeView
+
+        if (item?.image_1?.isEmpty() == true) {
+            // 画像がないため、ない画像をセット
+            viewHolder.imageView.setImageResource(android.R.drawable.ic_menu_report_image)
+        }
+        else{
+            // 読み込み中の画像をセット
+            viewHolder.imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
+
+            // 非同期で画像をダウンロードして表示します。
+            var w: Int = viewHolder.imageView.width
+            w = 320
+            var h: Int = viewHolder.imageView.height
+            h = 240
+
+            Picasso.get().load(item?.image_1)
+                .error(android.R.drawable.ic_menu_close_clear_cancel)
+                .placeholder(android.R.drawable.ic_menu_report_image)
+                .resize(w, h)
+                .centerCrop()
+                .into(viewHolder.imageView)
+        }
 
         viewHolder.itemView.setOnClickListener { itemView ->
             // 行をタップしたときに詳細画面を開きます
