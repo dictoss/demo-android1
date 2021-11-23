@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -50,13 +51,15 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView
         val titleView: TextView
         val datetimeView: TextView
 
         init {
             // Define click listener for the ViewHolder's View.
-            titleView = view.findViewById(R.id.textViewMyItemTitle)
-            datetimeView = view.findViewById(R.id.textViewMyItemDatetime)
+            imageView = view.findViewById(R.id.imageViewMyItemListCol)
+            titleView = view.findViewById(R.id.textViewTitleMyItemListCol)
+            datetimeView = view.findViewById(R.id.textViewUpdatedateMyItemListCol)
         }
 
     }
@@ -65,7 +68,7 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.myitem, viewGroup, false)
+            .inflate(R.layout.myitem_list_col, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -79,7 +82,7 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
 
         viewHolder.titleView.text = item?.title
         viewHolder.datetimeView.text = item?.update_date
-
+        //viewHolder.datetimeView
 
         viewHolder.itemView.setOnClickListener { itemView ->
             // 行をタップしたときに詳細画面を開きます
