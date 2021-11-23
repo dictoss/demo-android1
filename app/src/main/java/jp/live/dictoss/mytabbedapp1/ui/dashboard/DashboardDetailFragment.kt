@@ -1,5 +1,6 @@
 package jp.live.dictoss.mytabbedapp1
 
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
@@ -26,8 +28,7 @@ class DashboardDetailFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var c_id: Int? = -1
-    private var title: String? = ""
+    private var item: MyItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +56,14 @@ class DashboardDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val bundle: Bundle? = arguments
-        this.c_id = bundle?.getInt("id")
-        this.title = bundle?.getString("title")
+        this.item = bundle?.getParcelable("item")
 
-        val titleTextView: TextView? = this.view?.findViewById(R.id.fragment_detail_textView)
-        titleTextView?.text = this.title
+        val titleTextView: TextView? = this.view?.findViewById(R.id.textView)
+        titleTextView?.text = this.item?.title
+
+        val imageView: ImageView? = this.view?.findViewById(R.id.imageView)
+        //val imgUri = Uri.parse(this.image_1_url)
+        //imageView?.setImageURI(imgUri)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -2,6 +2,7 @@ package jp.live.dictoss.mytabbedapp1
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,31 +18,17 @@ import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
 import jp.live.dictoss.mytabbedapp1.MainActivity
 import jp.live.dictoss.mytabbedapp1.placeholder.PlaceholderContent
+import kotlinx.parcelize.Parcelize
 
-class MyItem (
-    _c_id: Int,
-    _title: String,
-    _content: String,
-    _image_1: String,
-    _create_date: String,
-    _update_date: String,
-){
-    var c_id : Int? = 0
-    var title : String? = ""
-    var content : String? = ""
-    var image_1 : String? = ""
-    var create_date : String? = ""
-    var update_date : String? = ""
-
-    init {
-        c_id = _c_id
-        title = _title
-        content = _content
-        image_1 = _image_1
-        create_date = _create_date
-        update_date = _update_date
-    }
-}
+@Parcelize
+data class MyItem (
+    val c_id: Int,
+    val title: String,
+    val content: String,
+    val image_1: String,
+    val create_date: String,
+    val update_date: String
+) : Parcelable
 
 class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Context, private val parentFragment: Fragment) :
 
@@ -87,16 +74,8 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
             // 行をタップしたときに詳細画面を開きます
             Log.i("TAG", "clicked item (%d:%S)".format(position, item?.title))
 
-            //val item = itemView.tag as PlaceholderContent.PlaceholderItem
             val bundle = Bundle()
-            bundle.putInt(
-                "id",
-                position
-            )
-            bundle.putString(
-                "title",
-                item?.title
-            )
+            bundle.putParcelable("item", item)
 
             parentFragment.findNavController().navigate(R.id.dashboardDetailFragment2, bundle)
         }
