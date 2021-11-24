@@ -40,16 +40,23 @@ class MainActivity : AppCompatActivity() {
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setHomeButtonEnabled(true)
 
-        // set up Bottom Navigation
+        // set up Bottom Navigation and NavigationDrawer on actionbar.
+        val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        navView.setupWithNavController(navController)
 
-        // set NavigationDrawer on actionbar.
-        // https://developer.android.com/guide/navigation/navigation-ui?hl=ja#add_a_navigation_drawer
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        this.appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        this.appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications,
+                R.id.navigation_video
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, this.appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
