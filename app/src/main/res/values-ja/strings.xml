@@ -1,4 +1,12 @@
 <resources>
+    <!-- Menu -->
+    <string name="menu_settings">設定</string>
+    <string name="nav_header_title">アンドロイドスタジオ</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">ナビゲーションヘッダー</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
     <!-- application message -->
     <string name="mainactivity_button_msgbox_desu_title">ダイアログタイトル</string>
     <string name="mainactivity_button_msgbox_desu_msg">これはダイアログのメッセージです。</string>

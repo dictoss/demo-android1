@@ -11,14 +11,22 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.navigateUp
+import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,27 +35,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // calling the action bar
+        // setting the action bar
         val actionBar: ActionBar? = supportActionBar
-
-        // showing the back button in action bar
         actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeButtonEnabled(true)
 
+        // set up Bottom Navigation
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications,
-                R.id.navigation_video
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // set NavigationDrawer on actionbar.
+        // https://developer.android.com/guide/navigation/navigation-ui?hl=ja#add_a_navigation_drawer
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        this.appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        setupActionBarWithNavController(navController, this.appBarConfiguration)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,17 +59,18 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        // アプリバー内の左端のドロワーアイコンをクリックしたときのイベント
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp(this.appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_main_settings-> {
                 Log.i("TAG", "IN onOptionsItemSelected()")
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
-                true
-            }
-            android.R.id.home -> {
-                onBackPressed()
-                //supportFragmentManager.popBackStack()
                 true
             }
             else -> super.onOptionsItemSelected(item)
