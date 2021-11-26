@@ -24,7 +24,7 @@ import androidx.navigation.ui.navigateUp
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         // set up Bottom Navigation and NavigationDrawer on actionbar.
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: BottomNavigationView = binding.navView
+        val navSideView: NavigationView = binding.navSideView
+        navSideView.setNavigationItemSelectedListener(this)
+
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         // Passing each menu ID as a set of Ids because each
@@ -81,6 +84,24 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_nav_settings-> {
+                Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_settings")
+                true
+            }
+            R.id.menu_nav_blog-> {
+                Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_blog")
+                true
+            }
+            R.id.menu_nav_hardware-> {
+                Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_hardware")
+                true
+            }
+            else-> { return true }
         }
     }
 

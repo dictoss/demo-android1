@@ -1,6 +1,8 @@
 <resources>
     <!-- Menu -->
     <string name="menu_settings">設定</string>
+    <string name="menu_blog">ブログ</string>
+    <string name="menu_hardware">ハードウェア</string>
     <string name="nav_header_title">アンドロイドスタジオ</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">ナビゲーションヘッダー</string>
