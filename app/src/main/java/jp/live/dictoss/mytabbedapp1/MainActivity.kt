@@ -89,6 +89,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return when (item.itemId) {
             R.id.menu_nav_settings-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_settings")
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
                 drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }
