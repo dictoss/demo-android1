@@ -2,8 +2,6 @@ package jp.live.dictoss.mytabbedapp1
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.app.AlertDialog
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
@@ -103,16 +101,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             else-> { return true }
         }
-    }
-
-    public fun onClickButtonDesu(view: View) {
-        Log.i("TAG","abcd.")
-
-        val builder: AlertDialog.Builder? = AlertDialog.Builder(this)
-        builder?.setTitle(R.string.mainactivity_button_msgbox_desu_title)
-        builder?.setMessage(R.string.mainactivity_button_msgbox_desu_msg)
-
-        val dialog: AlertDialog? = builder?.create()
-        dialog?.show()
     }
 }

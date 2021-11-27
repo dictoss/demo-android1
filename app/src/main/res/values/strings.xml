@@ -35,4 +35,8 @@
     <string name="mainactivity_button_msgbox_desu_title">Dialog Title</string>
     <string name="mainactivity_button_msgbox_desu_msg">This is dialog message.</string>
     <string name="dashboard_load_done">List load done.</string>
+
+    <!-- notifications fragment -->
+    <string name="fragment_notifications_text"></string>
+    <string name="fragment_notifications_button1_text">Show Dialog</string>
 </resources>

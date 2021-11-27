@@ -1,6 +1,8 @@
 package jp.live.dictoss.mytabbedapp1.ui.notifications
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentNotificationsBinding
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var notificationsViewModel: NotificationsViewModel
     private var _binding: FragmentNotificationsBinding? = null
@@ -31,15 +33,34 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
+        val textView: TextView = binding.fragmentNotificationsText
         notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val button1 = binding.fragmentNotificationsButton1
+        button1.setOnClickListener(this)
+
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(view: View) {
+        Log.i("TAG","NotificationsFragment.onClick()")
+
+        when (view.id) {
+            R.id.fragment_notifications_button1 -> {
+                val builder: AlertDialog.Builder? = AlertDialog.Builder(this.requireContext())
+                builder?.setTitle(R.string.mainactivity_button_msgbox_desu_title)
+                builder?.setMessage(R.string.mainactivity_button_msgbox_desu_msg)
+
+                val dialog: AlertDialog? = builder?.create()
+                dialog?.show()
+            }
+        }
     }
 }
