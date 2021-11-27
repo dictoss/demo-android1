@@ -3,6 +3,7 @@ package jp.live.dictoss.mytabbedapp1
 import android.os.Bundle
 import android.util.Log
 import android.content.Intent
+import android.net.Uri
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
@@ -18,6 +19,8 @@ import androidx.navigation.ui.setupWithNavController
 import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.navigation.NavigationView
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.preference.PreferenceManager
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -85,6 +88,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val drawerLayout: DrawerLayout = binding.drawerLayout
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         return when (item.itemId) {
             R.id.menu_nav_settings-> {
@@ -96,6 +100,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.menu_nav_blog-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_blog")
+
+                val tabsIntent : CustomTabsIntent = CustomTabsIntent.Builder()
+                    .setShowTitle(true)
+                    .build()
+
+                val pageUrl : String = sharedPreferences.getString("edit_text_preference_menu_item_blog_url", "") ?: ""
+                val uri : Uri = Uri.parse(pageUrl)
+                tabsIntent.intent.setPackage("com.android.chrome")
+                tabsIntent.launchUrl(this, uri)
+
                 drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }

@@ -13,6 +13,18 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Edit open URL" />
+        <EditTextPreference
+            android:defaultValue="http://www.pcdennokan.wjg.jp/site/article/"
+            android:key="edit_text_preference_menu_item_blog_url"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Blog of menu url" />
+        <EditTextPreference
+            android:defaultValue="http://www.pcdennokan.wjg.jp/site/tag/hardware_in_use/"
+            android:key="edit_text_preference_menu_item_hardware_url"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Hardware of menu url" />
 
     </PreferenceCategory>
 
