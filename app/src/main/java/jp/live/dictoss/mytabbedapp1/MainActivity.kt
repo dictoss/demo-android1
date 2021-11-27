@@ -116,6 +116,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.menu_nav_hardware-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_hardware")
+
+                val pageUrl : String = sharedPreferences.getString("edit_text_preference_menu_item_hardware_url", "") ?: ""
+                val uri : Uri = Uri.parse(pageUrl)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.setPackage("com.android.chrome")
+                startActivity(intent)
+
                 drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }
