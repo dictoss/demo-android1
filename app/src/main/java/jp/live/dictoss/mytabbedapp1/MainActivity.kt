@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 val tabsIntent : CustomTabsIntent = CustomTabsIntent.Builder()
                     .setShowTitle(true)
+                    .setUrlBarHidingEnabled(false)
                     .build()
 
                 val pageUrl : String = sharedPreferences.getString("edit_text_preference_menu_item_blog_url", "") ?: ""
