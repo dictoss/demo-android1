@@ -3,6 +3,7 @@ package jp.live.dictoss.mytabbedapp1
 import android.os.Bundle
 import android.util.Log
 import android.content.Intent
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -83,17 +84,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+
         return when (item.itemId) {
             R.id.menu_nav_settings-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_settings")
+                drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }
             R.id.menu_nav_blog-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_blog")
+                drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }
             R.id.menu_nav_hardware-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_hardware")
+                drawerLayout.closeDrawer(Gravity.LEFT)
                 false
             }
             else -> { return false }
