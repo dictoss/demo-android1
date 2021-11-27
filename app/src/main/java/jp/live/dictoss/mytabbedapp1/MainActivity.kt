@@ -15,9 +15,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.navigation.NavigationView
 

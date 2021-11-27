@@ -6,18 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import com.google.android.exoplayer2.MediaItem
-import jp.live.dictoss.mytabbedapp1.R
-import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentVideoBinding
-import jp.live.dictoss.mytabbedapp1.ui.home.HomeViewModel
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util.getUserAgent
-import jp.live.dictoss.mytabbedapp1.MainActivity
 
 
 class VideoFragment : Fragment() {

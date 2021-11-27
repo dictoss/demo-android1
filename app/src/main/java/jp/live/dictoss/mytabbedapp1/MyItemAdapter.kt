@@ -10,16 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
-import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
-import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
-import jp.live.dictoss.mytabbedapp1.MainActivity
-import jp.live.dictoss.mytabbedapp1.placeholder.PlaceholderContent
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
