@@ -17,4 +17,7 @@
     <!-- notifications fragment -->
     <string name="fragment_notifications_text"></string>
     <string name="fragment_notifications_button1_text">ダイアログ表示</string>
+
+    <!-- DashboardDetail fragment -->
+    <string name="fragment_notifications_static_update_date">更新日時</string>
 </resources>

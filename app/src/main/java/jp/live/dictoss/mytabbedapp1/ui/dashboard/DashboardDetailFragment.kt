@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 
 class DashboardDetailFragment : Fragment() {
@@ -52,21 +53,41 @@ class DashboardDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle: Bundle? = arguments
+        val bundle: Bundle? = this.arguments
         this.item = bundle?.getParcelable("item")
 
-        val titleTextView: TextView? = this.view?.findViewById(R.id.textView)
+        val titleTextView: TextView? = view.findViewById(R.id.fragmentDetailTitleTextView)
         titleTextView?.text = this.item?.title
 
-        val imageView: ImageView? = this.view?.findViewById(R.id.imageView)
-        //val imgUri = Uri.parse(this.image_1_url)
-        //imageView?.setImageURI(imgUri)
-    }
+        val updatedateTextView: TextView? = view.findViewById(R.id.fragmentDetailUpdateDateTextView)
+        updatedateTextView?.text = String.format("%s:%s",
+            getString(R.string.fragment_notifications_static_update_date),
+            this.item?.update_date)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        val contentTextView: TextView? = view.findViewById(R.id.fragmentDetailContentTextView)
+        contentTextView?.text = this.item?.content
 
+        val imageView: ImageView = view.findViewById(R.id.fragmentDetailImageView)
+        if (this.item?.image_1?.isEmpty() == true) {
+            // 画像がないため、ない画像をセット
+            imageView.setImageResource(android.R.drawable.ic_menu_report_image)
+        }
+        else{
+            // 読み込み中の画像をセット
+            imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
+
+            // 非同期で画像をダウンロードして表示します。
+            var w: Int = imageView.width
+            w = 320
+            var h: Int = imageView.height
+            h = 240
+
+            Picasso.get().load(this.item?.image_1)
+                .error(android.R.drawable.ic_menu_close_clear_cancel)
+                .placeholder(android.R.drawable.ic_menu_report_image)
+                .resize(w, h)
+                .centerCrop()
+                .into(imageView)
+        }
+    }
 }

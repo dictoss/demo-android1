@@ -39,4 +39,7 @@
     <!-- notifications fragment -->
     <string name="fragment_notifications_text"></string>
     <string name="fragment_notifications_button1_text">Show Dialog</string>
+
+    <!-- DashboardDetail fragment -->
+    <string name="fragment_notifications_static_update_date">Update Date</string>
 </resources>
