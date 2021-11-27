@@ -86,17 +86,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return when (item.itemId) {
             R.id.menu_nav_settings-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_settings")
-                true
+                false
             }
             R.id.menu_nav_blog-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_blog")
-                true
+                false
             }
             R.id.menu_nav_hardware-> {
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_hardware")
-                true
+                false
             }
-            else-> { return true }
+            else -> { return false }
         }
     }
 }
