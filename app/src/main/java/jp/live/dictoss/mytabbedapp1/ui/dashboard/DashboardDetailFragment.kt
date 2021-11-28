@@ -2,6 +2,7 @@ package jp.live.dictoss.mytabbedapp1
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,10 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.squareup.picasso.Picasso
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
+import com.android.billingclient.api.*
 
-class DashboardDetailFragment : Fragment() {
+
+class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener, SkuDetailsResponseListener {
 
     companion object {
         fun newInstance() = DashboardDetailFragment()
@@ -27,6 +30,9 @@ class DashboardDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var item: MyItem? = null
+
+    private var billingClient : BillingClient? = null
+    private val testProductId = "jp.live.dictoss.app_0001"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +52,12 @@ class DashboardDetailFragment : Fragment() {
             ViewModelProvider(this).get(DashboardDetailViewModel::class.java)
 
         this._binding = FragmentDashboardDetailBinding.inflate(inflater, container, false)
+        val root: View = binding.root
 
-        return inflater.inflate(R.layout.fragment_dashboard_detail, container, false)
+        val buttonProductQuery = binding.fragmentProductQueryButton
+        buttonProductQuery.setOnClickListener(this)
+
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,5 +99,90 @@ class DashboardDetailFragment : Fragment() {
                 .centerCrop()
                 .into(imageView)
         }
+
+        // 課金アイテムの取得処理
+        val billingClient: BillingClient = BillingClient.newBuilder(this.requireContext())
+            .setListener(this)
+            .enablePendingPurchases()
+            .build()
+
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    Log.i("TAG", String.format("onBillingSetupFinished() response code: %d", billingResult.responseCode))
+                } else {
+                    Log.w("TAG", String.format("onBillingSetupFinished() error code: %d", billingResult.responseCode))
+                }
+            }
+
+            override fun onBillingServiceDisconnected() {
+                Log.w("TAG", "onBillingServiceDisconnected()")
+            }
+        })
+
+        this.billingClient = billingClient
+    }
+
+    override fun onClick(view: View) {
+        Log.i("TAG","DashboardDetailFragment.onClick()")
+
+        when (view.id) {
+            R.id.fragmentProductQueryButton -> {
+                this.querySkuDetails()
+            }
+        }
+    }
+
+    private fun querySkuDetails()
+    {
+        var s: String = ""
+
+        if (this.billingClient == null){
+            return
+        }
+
+        try {
+            val skuList = listOf(this.testProductId)
+            val params = SkuDetailsParams.newBuilder()
+            params.setType(BillingClient.SkuType.INAPP).setSkusList(skuList)
+
+            this.billingClient?.querySkuDetailsAsync(params.build(), this)
+        } catch (e: Exception) {
+            Log.e("ERROR", String.format("ERROR on queryProductDetail() : %s ", e.message))
+        } finally {
+            //
+        }
+    }
+
+    override fun onPurchasesUpdated(billingResult: BillingResult, list: MutableList<Purchase>?) {
+        val b = billingResult
+        val l = list
+    }
+
+    override fun onSkuDetailsResponse(billingResult: BillingResult, skuDetailsList: MutableList<SkuDetails>?) {
+        var s : String = ""
+
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+            Log.i("TAG", String.format("onSkuDetailsResponse() response code: %d", billingResult.responseCode))
+
+            s += "Success onSkuDetailsResponse()\n"
+            if ((null != skuDetailsList) && (0 < skuDetailsList.size)) {
+                // it : SkuDetails
+                skuDetailsList?.forEach { it ->
+                    val i = it
+                    s += it.originalJson
+                    s += "\n"
+                }
+            } else {
+                s += "skuDetailsList is zero.\n"
+            }
+        } else {
+            val errMsg: String = String.format("onSkuDetailsResponse() error code: %d", billingResult.responseCode)
+            Log.w("TAG", errMsg)
+            s = errMsg
+        }
+
+        val multilineTextView: TextView? = this.view?.findViewById(R.id.fragmentProductInfoEditTextMultiLine)
+        multilineTextView?.text = s
     }
 }

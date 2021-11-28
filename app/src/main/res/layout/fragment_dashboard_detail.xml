@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:title="@string/title_fragment_dashboard_detail"
     tools:context=".DashboardDetailFragment">
 
     <ImageView
         android:id="@+id/fragmentDetailImageView"
-        android:layout_width="320dp"
-        android:layout_height="240dp"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -25,11 +25,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailImageView" />
+        app:layout_constraintTop_toBottomOf="@id/fragmentDetailImageView" />
 
     <TextView
         android:id="@+id/fragmentDetailUpdateDateTextView"
@@ -52,5 +52,30 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragmentDetailUpdateDateTextView" />
+
+    <Button
+        android:id="@+id/fragmentProductQueryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Query Product Detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragmentDetailContentTextView" />
+
+    <EditText
+        android:id="@+id/fragmentProductInfoEditTextMultiLine"
+        android:layout_width="0dp"
+        android:layout_height="300px"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragmentProductQueryButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
