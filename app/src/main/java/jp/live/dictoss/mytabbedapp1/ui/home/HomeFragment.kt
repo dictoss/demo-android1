@@ -23,6 +23,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var webView: WebView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,34 +35,48 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val _webView: WebView = binding.homeWebview
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
-        val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
-        val use_js: Boolean = sharedPreferences.getBoolean("switch_preference_webview_use_javascript", false)
+        // ref: https://memo.abridge-lab.com/?p=150
+        if (this.webView == null) {
+            this.webView = binding.homeWebview
+        }
 
-        //_webView.loadUrl("http://www.pcdennokan.wjg.jp/site/top/")
-        //_webView.settings.javaScriptEnabled = true
-        Log.i("CONF", openurl)
-        //Log.i("CONF", use_js)
-        _webView.loadUrl(openurl)
-        _webView.settings.javaScriptEnabled = use_js
+        if (savedInstanceState != null) {
+            // 回転したときに、回転前のwebページの位置を復元します
+            this.webView?.restoreState(savedInstanceState)
+        }
 
-        // If click on webview, not jump chrome.
-        _webView.setWebViewClient(object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
-            ): Boolean {
-                return false
-            }
-        })
+        if (this.webView?.url == null) {
+            Log.i("CONF", "webView first call")
 
-        homeViewModel.webview.observe(viewLifecycleOwner, Observer {
-            //webView.loadUrl(it)
-        })
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
+            val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
+            val use_js: Boolean = sharedPreferences.getBoolean("switch_preference_webview_use_javascript", false)
+
+            this.webView?.settings?.javaScriptEnabled = use_js
+            this.webView?.clearCache(true)
+            this.webView?.loadUrl(openurl)
+
+            // If click on webview, not jump chrome.
+            this.webView?.setWebViewClient(object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    return false
+                }
+            })
+        } else {
+            Log.i("CONF", "webView already call")
+        }
 
         return root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        // 回転したときに、回転前のwebページの位置を保存します
+        this.webView?.saveState(outState)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDestroyView() {
@@ -68,4 +84,14 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onDestroy() {
+        // メモリリーク対策
+        this.webView?.stopLoading()
+        this.webView?.webChromeClient = null
+        //this.webView?.webViewClient = null
+        this.webView?.destroy()
+        this.webView = null
+
+        super.onDestroy()
+    }
 }
