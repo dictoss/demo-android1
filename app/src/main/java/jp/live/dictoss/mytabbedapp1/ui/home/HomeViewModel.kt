@@ -9,13 +9,6 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
 
-    //private val _text = MutableLiveData<String>().apply {
-    //    value = "This is home Fragment"
-    //}
-    //val text: LiveData<String> = _text
-
-    private val _webView = MutableLiveData<WebView>().apply {
-
-    }
-    val webview: LiveData<WebView> = _webView
+    private val _webView = MutableLiveData<WebView>()
+    val webView: LiveData<WebView> = _webView
 }
