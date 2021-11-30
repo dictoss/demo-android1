@@ -30,15 +30,21 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
+        this.homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        this._binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val root: View = this.binding.root
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // ref: https://memo.abridge-lab.com/?p=150
         if (this.webView == null) {
-            this.webView = binding.homeWebview
+            this.webView = this.binding.homeWebview
         }
 
         if (savedInstanceState != null) {
@@ -69,8 +75,6 @@ class HomeFragment : Fragment() {
         } else {
             Log.i("CONF", "webView already call")
         }
-
-        return root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -81,7 +85,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        this._binding = null
     }
 
     override fun onDestroy() {
