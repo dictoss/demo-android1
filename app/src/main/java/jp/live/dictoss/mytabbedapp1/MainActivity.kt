@@ -20,6 +20,7 @@ import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.navigation.NavigationView
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 
 
@@ -45,8 +46,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navSideView: NavigationView = binding.navSideView
         navSideView.setNavigationItemSelectedListener(this)
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         this.appBarConfiguration = AppBarConfiguration(
@@ -57,8 +56,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.navigation_video
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, this.appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        //val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)?.findNavController().let { nc ->
+            if (nc != null) {
+                setupActionBarWithNavController(nc, this.appBarConfiguration)
+                navView.setupWithNavController(nc)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
