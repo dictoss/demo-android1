@@ -38,6 +38,14 @@ class DashboardFragment : Fragment() {
         rv?.setHasFixedSize(true)
         rv?.layoutManager = LinearLayoutManager(this.requireContext())
 
+        // When swipe, reload list data.
+        binding.swipedLayout.setOnRefreshListener {
+            dashboardViewModel =
+                ViewModelProvider(this).get(DashboardViewModel::class.java)
+
+            dashboardViewModel.beginLoadItems()
+        }
+
         return root
     }
 
@@ -52,6 +60,7 @@ class DashboardFragment : Fragment() {
             // ここは画面を縦と横を変更するともこの処理が再度実行される。
             //
             binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+            binding.swipedLayout.isRefreshing = false
 
             var rv : RecyclerView? = binding.dashboardRecyclerView
             // set data RecyclerView.
@@ -65,9 +74,11 @@ class DashboardFragment : Fragment() {
             val toast = Toast.makeText(this.requireContext(), text, duration)
             toast.show()
         })
-        
-        dashboardViewModel.beginLoadItems()
-        binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+
+        if (dashboardViewModel.items.value == null) {
+            dashboardViewModel.beginLoadItems()
+            binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+        }
     }
 
     override fun onDestroyView() {
