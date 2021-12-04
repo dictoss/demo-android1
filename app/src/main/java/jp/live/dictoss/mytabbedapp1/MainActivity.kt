@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // set up Bottom Navigation and NavigationDrawer on actionbar.
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: BottomNavigationView = binding.navView
         val navSideView: NavigationView = binding.navSideView
         navSideView.setNavigationItemSelectedListener(this)
 
@@ -58,10 +57,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ), drawerLayout
         )
 
-        //val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)?.findNavController().let { nc ->
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)?.findNavController().let { nc ->
             if (nc != null) {
                 setupActionBarWithNavController(nc, this.appBarConfiguration)
+
+                val navView: BottomNavigationView = binding.appBarMain.includeContentMain.navBottomView
                 navView.setupWithNavController(nc)
             }
         }
