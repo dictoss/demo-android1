@@ -16,6 +16,7 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
+            android:theme="@style/Theme.MyTabbedApp1"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".MainActivity"
