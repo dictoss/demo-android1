@@ -1,11 +1,13 @@
 package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
+import android.content.Context
 import android.icu.util.TimeUnit
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.JsonMyItem
 import jp.live.dictoss.mytabbedapp1.MyItem
 import kotlinx.serialization.Serializable
@@ -21,22 +23,23 @@ class DashboardViewModel : ViewModel() {
     private val _items : MutableLiveData<List<MyItem>> = MutableLiveData<List<MyItem>>()
     val items : LiveData<List<MyItem>> = _items
 
-    private val connectTimeoutMill : Long = 10 * 1000
-    private val readTimeoutMill : Long = 10 * 1000
-
-    fun beginLoadItems()
+    fun beginLoadItems(context: Context)
     {
         try {
             // Requestを作成
             val targetUri: String = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_list.json"
 
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val timeoutConnStr: String = sharedPreferences.getString("edit_text_preference_network_connect_timeout", "10000") ?: "10000"
+            val timeoutReadStr: String = sharedPreferences.getString("edit_text_preference_network_read_timeout", "15000") ?: "15000"
+
             val httpClient = OkHttpClient.Builder()
                 .connectTimeout(
-                    connectTimeoutMill,
+                    timeoutConnStr.toLong(),
                     java.util.concurrent.TimeUnit.MILLISECONDS
                 )
                 .readTimeout(
-                    readTimeoutMill,
+                    timeoutReadStr.toLong(),
                     java.util.concurrent.TimeUnit.MILLISECONDS)
                 .build()
 

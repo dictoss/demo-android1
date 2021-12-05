@@ -25,12 +25,16 @@
     <string name="preferencecategory_title_webview">WebView Settings</string>
     <string name="preferencecategory_title_sidemenu">SideMenu Settings</string>
     <string name="preferencecategory_title_video">Video Setting</string>
+    <string name="preferencecategory_title_network">Network Setting</string>
 
     <string name="preference_use_javascript">Use Javascript</string>
     <string name="preference_webview_openurl">View URL on Home Screen</string>
     <string name="preference_menu_item_blog_url">URL on Blog</string>
     <string name="preference_menu_item_hardware_url">URL on Hardware</string>
     <string name="preference_video_mpd_url">mpd file URL</string>
+
+    <string name="preference_network_connect_timeout">Connect timeout time (milliseconds)</string>
+    <string name="preference_network_read_timeout">Read timeout time (milliseconds)</string>
 
     <!-- application message -->
     <string name="mainactivity_button_msgbox_desu_title">Dialog Title</string>

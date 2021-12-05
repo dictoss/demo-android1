@@ -43,7 +43,7 @@ class DashboardFragment : Fragment() {
             dashboardViewModel =
                 ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-            dashboardViewModel.beginLoadItems()
+            dashboardViewModel.beginLoadItems(requireContext())
         }
 
         return root
@@ -76,7 +76,7 @@ class DashboardFragment : Fragment() {
         })
 
         if (dashboardViewModel.items.value == null) {
-            dashboardViewModel.beginLoadItems()
+            dashboardViewModel.beginLoadItems(this.requireContext())
             binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
         }
     }

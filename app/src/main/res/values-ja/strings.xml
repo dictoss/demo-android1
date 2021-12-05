@@ -25,12 +25,16 @@
     <string name="preferencecategory_title_webview">WebView設定</string>
     <string name="preferencecategory_title_sidemenu">サイドメニュー設定</string>
     <string name="preferencecategory_title_video">ビデオ設定</string>
+    <string name="preferencecategory_title_network">ネットワーク設定</string>
 
     <string name="preference_use_javascript">Javascriptの使用</string>
     <string name="preference_webview_openurl">Home画面で表示するURL</string>
     <string name="preference_menu_item_blog_url">「ブログ」のURL</string>
     <string name="preference_menu_item_hardware_url">「ハードウェア」のURL</string>
     <string name="preference_video_mpd_url">mpdファイルのURL</string>
+
+    <string name="preference_network_connect_timeout">接続タイムアウト時間 (ミリ秒)</string>
+    <string name="preference_network_read_timeout">読み込みタイムアウト時間 (ミリ秒)</string>
 
     <!-- application message -->
     <string name="mainactivity_button_msgbox_desu_title">ダイアログタイトル</string>
