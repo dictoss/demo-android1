@@ -1,21 +1,16 @@
 package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
 import android.content.Context
-import android.icu.util.TimeUnit
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.JsonMyItem
 import jp.live.dictoss.mytabbedapp1.MyItem
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.*
-import okhttp3.internal.wait
 import okio.IOException
 
 class DashboardViewModel : ViewModel() {
@@ -48,7 +43,7 @@ class DashboardViewModel : ViewModel() {
                 .build()
 
             // 非同期処理でHTTP通信を行う
-            var call = httpClient.newCall(request).enqueue(object : Callback {
+            httpClient.newCall(request).enqueue(object : Callback {
 
                 // 正常応答時
                 override fun onResponse(call: Call, response: Response) {
@@ -60,17 +55,17 @@ class DashboardViewModel : ViewModel() {
                         ignoreUnknownKeys = true
                     }
                     val jsonObj = jsonInst.decodeFromString<List<JsonMyItem>>(responseBody)
-                    var dataset = mutableListOf<MyItem>()
+                    val dataset = mutableListOf<MyItem>()
 
                     for (i in jsonObj) {
-                        var data: MyItem = MyItem(
+                        val data = MyItem(
                             i.c_id,
                             i.title,
                             i.content,
                             i.image_1,
                             i.update_date,
                             i.update_date)
-                        dataset?.add(data)
+                        dataset.add(data)
                     }
 
                     _items.postValue(dataset)
