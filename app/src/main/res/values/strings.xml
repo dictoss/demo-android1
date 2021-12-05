@@ -19,6 +19,7 @@
     <!-- Menu -->
     <string name="menu_back">Back</string>
     <string name="menu_reload">Reload</string>
+    <string name="menu_home">Home</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">Settings</string>

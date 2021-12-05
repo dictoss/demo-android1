@@ -20,6 +20,7 @@
     <!-- Menu -->
     <string name="menu_back">戻る</string>
     <string name="menu_reload">再読み込み</string>
+    <string name="menu_home">ホーム</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">設定</string>

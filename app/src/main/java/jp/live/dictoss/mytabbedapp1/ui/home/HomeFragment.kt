@@ -100,6 +100,20 @@ class HomeFragment : Fragment() {
                 }
                 true
             }
+            R.id.menu_home-> {
+                Log.i("TAG", "IN onOptionsItemSelected(): home")
+                if (this.webView != null) {
+                    this.webView?.clearCache(true)
+
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
+                    val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
+
+                    if (openurl.isNotEmpty()) {
+                        this.webView?.loadUrl(openurl)
+                    }
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

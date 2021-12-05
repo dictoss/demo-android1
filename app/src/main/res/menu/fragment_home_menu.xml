@@ -12,4 +12,9 @@
         android:icon="@android:drawable/ic_menu_rotate"
         android:title="@string/menu_reload"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/menu_home"
+        app:showAsAction="ifRoom" />
 </menu>
