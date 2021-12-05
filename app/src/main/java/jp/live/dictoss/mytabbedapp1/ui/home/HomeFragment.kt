@@ -2,15 +2,14 @@ package jp.live.dictoss.mytabbedapp1.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -23,6 +22,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var webView: WebView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_home_menu, menu)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,6 +80,20 @@ class HomeFragment : Fragment() {
             })
         } else {
             Log.i("CONF", "webView already call")
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_back-> {
+                Log.i("TAG", "IN onOptionsItemSelected(): back")
+                true
+            }
+            R.id.menu_reload-> {
+                Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

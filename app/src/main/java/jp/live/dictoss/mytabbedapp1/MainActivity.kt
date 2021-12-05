@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.view.Gravity
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -68,28 +67,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.activity_main_menu, menu)
-
-        return true
+        return false
     }
 
     override fun onSupportNavigateUp(): Boolean {
         // アプリバー内の左端のドロワーアイコンをクリックしたときのイベント
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         return navController.navigateUp(this.appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_main_settings-> {
-                Log.i("TAG", "IN onOptionsItemSelected()")
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

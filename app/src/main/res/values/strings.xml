@@ -16,8 +16,9 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
 
-    <!-- Three dots Menu -->
-    <string name="menu_threedots_settings">Settings</string>
+    <!-- Menu -->
+    <string name="menu_back">Back</string>
+    <string name="menu_reload">Reload</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">Settings</string>

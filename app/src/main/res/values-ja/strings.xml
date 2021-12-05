@@ -17,7 +17,9 @@
     <string name="drawer_close">Drawer Close</string>
 
     <!-- Three dots Menu -->
-    <string name="menu_threedots_settings">設定</string>
+    <!-- Menu -->
+    <string name="menu_back">戻る</string>
+    <string name="menu_reload">再読み込み</string>
 
     <!-- Settings Activity -->
     <string name="title_activity_settings">設定</string>

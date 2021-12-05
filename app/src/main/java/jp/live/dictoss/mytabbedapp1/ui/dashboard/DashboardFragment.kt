@@ -2,9 +2,7 @@ package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,6 +22,15 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_dashboard_menu, menu)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +85,16 @@ class DashboardFragment : Fragment() {
         if (dashboardViewModel.items.value == null) {
             dashboardViewModel.beginLoadItems(this.requireContext())
             binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_reload-> {
+                Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
