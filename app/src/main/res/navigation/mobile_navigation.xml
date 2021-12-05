@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/navigation_video"
         android:name="jp.live.dictoss.mytabbedapp1.ui.video.VideoFragment"
-        android:label="Video"
+        android:label="@string/title_video"
         tools:layout="@layout/fragment_video" />
     <fragment
         android:id="@+id/dashboardDetailFragment2"

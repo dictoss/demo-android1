@@ -1,5 +1,12 @@
 <resources>
-    <!-- Menu -->
+    <string name="app_name">マイタブアプリ1</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_dashboard">ダッシュボード</string>
+    <string name="title_notifications">通知</string>
+    <string name="title_fragment_dashboard_detail">ダッシュボード詳細</string>
+    <string name="title_video">ビデオ</string>
+
+    <!-- Navigation Drawer -->
     <string name="menu_settings">設定</string>
     <string name="menu_blog">ブログ</string>
     <string name="menu_hardware">ハードウェア</string>
@@ -9,15 +16,32 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
 
+    <!-- Three dots Menu -->
+    <string name="menu_threedots_settings">設定</string>
+
+    <!-- Settings Activity -->
+    <string name="title_activity_settings">設定</string>
+
+    <string name="preferencecategory_title_webview">WebView設定</string>
+    <string name="preferencecategory_title_sidemenu">サイドメニュー設定</string>
+    <string name="preferencecategory_title_video">ビデオ設定</string>
+
+    <string name="preference_use_javascript">Javascriptの使用</string>
+    <string name="preference_webview_openurl">Home画面で表示するURL</string>
+    <string name="preference_menu_item_blog_url">「ブログ」のURL</string>
+    <string name="preference_menu_item_hardware_url">「ハードウェア」のURL</string>
+    <string name="preference_video_mpd_url">mpdファイルのURL</string>
+
     <!-- application message -->
     <string name="mainactivity_button_msgbox_desu_title">ダイアログタイトル</string>
     <string name="mainactivity_button_msgbox_desu_msg">これはダイアログのメッセージです。</string>
     <string name="dashboard_load_done">リストの読み込みが完了しました。</string>
 
     <!-- notifications fragment -->
-    <string name="fragment_notifications_text"></string>
+    <string name="fragment_notifications_text">これは通知フラグメントです。</string>
     <string name="fragment_notifications_button1_text">ダイアログ表示</string>
 
     <!-- DashboardDetail fragment -->
     <string name="fragment_notifications_static_update_date">更新日時</string>
+    <string name="fragment_notifications_buttom_query_item">商品詳細取得</string>
 </resources>

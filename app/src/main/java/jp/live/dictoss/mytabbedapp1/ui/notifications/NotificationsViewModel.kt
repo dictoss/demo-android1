@@ -10,4 +10,8 @@ class NotificationsViewModel : ViewModel() {
         value = "This is notifications Fragment"
     }
     val text: LiveData<String> = _text
+
+    fun beginSetText(s: String) {
+        _text.postValue(s)
+    }
 }

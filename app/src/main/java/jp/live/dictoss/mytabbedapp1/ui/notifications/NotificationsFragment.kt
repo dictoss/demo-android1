@@ -41,6 +41,7 @@ class NotificationsFragment : Fragment(), View.OnClickListener {
         val button1 = binding.fragmentNotificationsButton1
         button1.setOnClickListener(this)
 
+        notificationsViewModel.beginSetText(getString(R.string.fragment_notifications_text))
         return root
     }
 

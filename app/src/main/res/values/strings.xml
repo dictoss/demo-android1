@@ -4,8 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_fragment_dashboard_detail">Item Detail</string>
+    <string name="title_video">Video</string>
 
-    <!-- Menu -->
+    <!-- Navigation Drawer -->
     <string name="menu_settings">Settings</string>
     <string name="menu_blog">Blog</string>
     <string name="menu_hardware">Hardware</string>
@@ -15,21 +16,21 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
 
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <!-- Three dots Menu -->
+    <string name="menu_threedots_settings">Settings</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Settings Activity -->
+    <string name="title_activity_settings">Settings</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="preferencecategory_title_webview">WebView Settings</string>
+    <string name="preferencecategory_title_sidemenu">SideMenu Settings</string>
+    <string name="preferencecategory_title_video">Video Setting</string>
+
+    <string name="preference_use_javascript">Use Javascript</string>
+    <string name="preference_webview_openurl">View URL on Home Screen</string>
+    <string name="preference_menu_item_blog_url">URL on Blog</string>
+    <string name="preference_menu_item_hardware_url">URL on Hardware</string>
+    <string name="preference_video_mpd_url">mpd file URL</string>
 
     <!-- application message -->
     <string name="mainactivity_button_msgbox_desu_title">Dialog Title</string>
@@ -37,9 +38,10 @@
     <string name="dashboard_load_done">List load done.</string>
 
     <!-- notifications fragment -->
-    <string name="fragment_notifications_text"></string>
+    <string name="fragment_notifications_text">This is notifications Fragment.</string>
     <string name="fragment_notifications_button1_text">Show Dialog</string>
 
     <!-- DashboardDetail fragment -->
     <string name="fragment_notifications_static_update_date">Update Date</string>
+    <string name="fragment_notifications_buttom_query_item">Query Product Detail</string>
 </resources>
