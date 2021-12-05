@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">マイタブアプリ1</string>
-    <string name="title_home">ホーム</string>
-    <string name="title_dashboard">ダッシュボード</string>
-    <string name="title_notifications">通知</string>
-    <string name="title_fragment_dashboard_detail">ダッシュボード詳細</string>
-    <string name="title_video">ビデオ</string>
+    <string name="title_home"></string>
+    <string name="title_dashboard"></string>
+    <string name="title_notifications"></string>
+    <string name="title_fragment_dashboard_detail"></string>
+    <string name="title_video"></string>
 
     <!-- Navigation Drawer -->
     <string name="menu_settings">設定</string>
