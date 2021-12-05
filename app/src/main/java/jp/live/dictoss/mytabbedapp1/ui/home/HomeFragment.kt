@@ -87,10 +87,17 @@ class HomeFragment : Fragment() {
         return when (item.itemId) {
             R.id.menu_back-> {
                 Log.i("TAG", "IN onOptionsItemSelected(): back")
+                if (this.webView != null) {
+                    this.webView?.goBack()
+                }
                 true
             }
             R.id.menu_reload-> {
                 Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                if (this.webView != null) {
+                    this.webView?.clearCache(true)
+                    this.webView?.reload()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

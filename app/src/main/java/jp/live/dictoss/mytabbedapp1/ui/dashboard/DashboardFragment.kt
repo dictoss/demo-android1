@@ -92,6 +92,8 @@ class DashboardFragment : Fragment() {
         return when (item.itemId) {
             R.id.menu_reload-> {
                 Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                dashboardViewModel.beginLoadItems(this.requireContext())
+                binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
                 true
             }
             else -> super.onOptionsItemSelected(item)
