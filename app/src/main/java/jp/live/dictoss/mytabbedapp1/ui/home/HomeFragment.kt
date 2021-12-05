@@ -9,7 +9,6 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
@@ -29,14 +28,13 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         this.homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         this._binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = this.binding.root
 
-        return root
+        return this.binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,14 +55,14 @@ class HomeFragment : Fragment() {
 
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
             val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
-            val use_js: Boolean = sharedPreferences.getBoolean("switch_preference_webview_use_javascript", false)
+            val useJs: Boolean = sharedPreferences.getBoolean("switch_preference_webview_use_javascript", false)
 
-            this.webView?.settings?.javaScriptEnabled = use_js
+            this.webView?.settings?.javaScriptEnabled = useJs
             this.webView?.clearCache(true)
             this.webView?.loadUrl(openurl)
 
-            // If click on webview, not jump chrome.
-            this.webView?.setWebViewClient(object : WebViewClient() {
+            // If click on WebView, not jump chrome.
+            this.webView?.webViewClient = (object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
                     request: WebResourceRequest?
