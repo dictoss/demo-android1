@@ -6,6 +6,12 @@
     <string name="title_fragment_dashboard_detail"></string>
     <string name="title_video"></string>
 
+    <!-- BottomNavigationView -->
+    <string name="bottom_menu_item_home">Home</string>
+    <string name="bottom_menu_item_dashboard">Dashboard</string>
+    <string name="bottom_menu_item_notifications">Notifications</string>
+    <string name="bottom_menu_item_video">Video</string>
+
     <!-- Navigation Drawer -->
     <string name="menu_settings">Settings</string>
     <string name="menu_blog">Blog</string>
