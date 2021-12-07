@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
@@ -26,6 +27,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setHasOptionsMenu(true)
+
+        PreferenceManager.setDefaultValues(this.requireContext(), R.xml.root_preferences, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
