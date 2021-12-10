@@ -72,12 +72,12 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val item: MyItem? = dataSet[position]
+        val item: MyItem = dataSet[position]
 
-        viewHolder.titleView.text = item?.title
-        viewHolder.datetimeView.text = item?.update_date
+        viewHolder.titleView.text = item.title
+        viewHolder.datetimeView.text = item.update_date
 
-        if (item?.image_1?.isEmpty() == true) {
+        if (item.image_1.isEmpty()) {
             // 画像がないため、ない画像をセット
             viewHolder.imageView.setImageResource(android.R.drawable.ic_menu_report_image)
         }
@@ -86,12 +86,12 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
             viewHolder.imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
 
             // 非同期で画像をダウンロードして表示します。
-            var w: Int = viewHolder.imageView.width
-            w = 320
-            var h: Int = viewHolder.imageView.height
-            h = 240
+            //val w: Int = viewHolder.imageView.width
+            val w: Int = 320
+            //val h: Int = viewHolder.imageView.height
+            val h: Int = 240
 
-            Picasso.get().load(item?.image_1)
+            Picasso.get().load(item.image_1)
                 .error(android.R.drawable.ic_menu_close_clear_cancel)
                 .placeholder(android.R.drawable.ic_menu_report_image)
                 .resize(w, h)
@@ -99,9 +99,9 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
                 .into(viewHolder.imageView)
         }
 
-        viewHolder.itemView.setOnClickListener { itemView ->
+        viewHolder.itemView.setOnClickListener {
             // 行をタップしたときに詳細画面を開きます
-            Log.i("TAG", "clicked item (%d:%S)".format(position, item?.title))
+            Log.i("TAG", "clicked item (%d:%S)".format(position, item.title))
 
             val bundle = Bundle()
             bundle.putParcelable("item", item)
