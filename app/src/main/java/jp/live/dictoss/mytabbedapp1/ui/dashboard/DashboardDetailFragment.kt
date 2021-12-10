@@ -87,10 +87,10 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
             imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
 
             // 非同期で画像をダウンロードして表示します。
-            var w: Int = imageView.width
-            w = 320
-            var h: Int = imageView.height
-            h = 240
+            //var w: Int = imageView.width
+            var w: Int = 320
+            //var h: Int = imageView.height
+            var h: Int = 240
 
             Picasso.get().load(this.item?.image_1)
                 .error(android.R.drawable.ic_menu_close_clear_cancel)
@@ -135,8 +135,6 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
 
     private fun querySkuDetails()
     {
-        var s: String = ""
-
         if (this.billingClient == null){
             return
         }
@@ -155,8 +153,6 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, list: MutableList<Purchase>?) {
-        val b = billingResult
-        val l = list
     }
 
     override fun onSkuDetailsResponse(billingResult: BillingResult, skuDetailsList: MutableList<SkuDetails>?) {
@@ -168,8 +164,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
             s += "Success onSkuDetailsResponse()\n"
             if ((null != skuDetailsList) && (0 < skuDetailsList.size)) {
                 // it : SkuDetails
-                skuDetailsList?.forEach { it ->
-                    val i = it
+                skuDetailsList.forEach { it ->
                     s += it.originalJson
                     s += "\n"
                 }
