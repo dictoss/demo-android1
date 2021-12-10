@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setHomeButtonEnabled(true)
+        actionBar?.setDisplayShowTitleEnabled(false)
 
         // set up Bottom Navigation and NavigationDrawer on actionbar.
         val drawerLayout: DrawerLayout = binding.drawerLayout

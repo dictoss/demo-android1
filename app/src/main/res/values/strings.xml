@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">MyTabbedApp1</string>
-    <string name="title_home"></string>
-    <string name="title_dashboard"></string>
-    <string name="title_notifications"></string>
-    <string name="title_fragment_dashboard_detail"></string>
-    <string name="title_video"></string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_fragment_dashboard_detail">Dashboard Detail</string>
+    <string name="title_video">Video</string>
 
     <!-- BottomNavigationView -->
     <string name="bottom_menu_item_home">Home</string>
