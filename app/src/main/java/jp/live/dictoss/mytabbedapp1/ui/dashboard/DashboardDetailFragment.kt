@@ -18,10 +18,6 @@ import com.android.billingclient.api.*
 
 class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener, SkuDetailsResponseListener {
 
-    companion object {
-        fun newInstance() = DashboardDetailFragment()
-    }
-
     private lateinit var viewModel: DashboardDetailViewModel
     private var _binding: FragmentDashboardDetailBinding? = null
 
