@@ -1,16 +1,15 @@
 package jp.live.dictoss.mytabbedapp1.ui.video
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.exoplayer2.MediaItem
-import jp.live.dictoss.mytabbedapp1.databinding.FragmentVideoBinding
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
-
+import jp.live.dictoss.mytabbedapp1.databinding.FragmentVideoBinding
 
 class VideoFragment : Fragment() {
 

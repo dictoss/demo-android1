@@ -8,20 +8,19 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
 import androidx.navigation.ui.navigateUp
-import com.google.android.material.navigation.NavigationView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
-
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import jp.live.dictoss.mytabbedapp1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

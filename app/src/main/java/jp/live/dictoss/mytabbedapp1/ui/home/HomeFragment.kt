@@ -12,7 +12,6 @@ import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 
-
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel

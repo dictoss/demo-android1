@@ -1,20 +1,19 @@
 package jp.live.dictoss.mytabbedapp1
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import com.android.billingclient.api.*
 import com.squareup.picasso.Picasso
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
-import com.android.billingclient.api.*
-
 
 class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener, SkuDetailsResponseListener {
 
