@@ -177,7 +177,9 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
             s = errMsg
         }
 
-        val multilineTextView: TextView? = this.view?.findViewById(R.id.fragmentProductInfoEditTextMultiLine)
-        multilineTextView?.text = s
+        this.activity?.runOnUiThread {
+            val multilineTextView: TextView? = this.view?.findViewById(R.id.fragmentProductInfoEditTextMultiLine)
+            multilineTextView?.text = s
+        }
     }
 }
