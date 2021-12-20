@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentVideoBinding
 
@@ -39,7 +39,7 @@ class VideoFragment : Fragment() {
         val root: View = binding.root
         val playerView: PlayerView = binding.playerView
 
-        val player = SimpleExoPlayer.Builder(this.requireContext()).build()
+        val player = ExoPlayer.Builder(this.requireContext()).build()
 
         // MPEG-DASH
         //var streamingUri : String = "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"
