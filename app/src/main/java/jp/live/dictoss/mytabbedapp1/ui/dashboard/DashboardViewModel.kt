@@ -22,7 +22,7 @@ class DashboardViewModel : ViewModel() {
     {
         try {
             // Requestを作成
-            val targetUri: String = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_list.json"
+            val targetUri = "http://www.pcdennokan.wjg.jp/proto/ajaxtest_list.json"
 
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val timeoutConnStr: String = sharedPreferences.getString("edit_text_preference_network_connect_timeout", "10000") ?: "10000"

@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import jp.live.dictoss.mytabbedapp1.MyItem
 import jp.live.dictoss.mytabbedapp1.MyItemAdapter
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
@@ -36,14 +34,14 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // RecyclerView
-        var rv : RecyclerView? = binding.dashboardRecyclerView
-        rv?.setHasFixedSize(true)
-        rv?.layoutManager = LinearLayoutManager(this.requireContext())
+        val rv : RecyclerView = binding.dashboardRecyclerView
+        rv.setHasFixedSize(true)
+        rv.layoutManager = LinearLayoutManager(this.requireContext())
 
         // When swipe, reload list data.
         binding.swipedLayout.setOnRefreshListener {
@@ -62,17 +60,17 @@ class DashboardFragment : Fragment() {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        dashboardViewModel.items.observe(viewLifecycleOwner, Observer<List<MyItem>> { items ->
+        dashboardViewModel.items.observe(viewLifecycleOwner, { items ->
             //
             // ここは画面を縦と横を変更するともこの処理が再度実行される。
             //
             binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
             binding.swipedLayout.isRefreshing = false
 
-            var rv : RecyclerView? = binding.dashboardRecyclerView
+            val rv : RecyclerView = binding.dashboardRecyclerView
             // set data RecyclerView.
             //rv?.adapter = MyItemAdapter(emptyList())
-            rv?.adapter = MyItemAdapter(items, this.requireContext(), this)
+            rv.adapter = MyItemAdapter(items, this.requireContext(), this)
 
             // notify message
             val text = R.string.dashboard_load_done
