@@ -1,4 +1,4 @@
-package jp.live.dictoss.mytabbedapp1
+package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package jp.live.dictoss.mytabbedapp1
+package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,8 @@ import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.android.billingclient.api.*
 import com.squareup.picasso.Picasso
+import jp.live.dictoss.mytabbedapp1.MyItem
+import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 
 class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener, SkuDetailsResponseListener {
@@ -42,7 +44,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         this.viewModel =
             ViewModelProvider(this).get(DashboardDetailViewModel::class.java)
 
@@ -64,8 +66,8 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         val titleTextView: TextView? = view.findViewById(R.id.fragmentDetailTitleTextView)
         titleTextView?.text = this.item?.title
 
-        val updatedateTextView: TextView? = view.findViewById(R.id.fragmentDetailUpdateDateTextView)
-        updatedateTextView?.text = String.format("%s:%s",
+        val updateDateTextView: TextView? = view.findViewById(R.id.fragmentDetailUpdateDateTextView)
+        updateDateTextView?.text = String.format("%s:%s",
             getString(R.string.fragment_notifications_static_update_date),
             this.item?.update_date)
 
@@ -82,15 +84,10 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
             imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
 
             // 非同期で画像をダウンロードして表示します。
-            //var w: Int = imageView.width
-            var w: Int = 320
-            //var h: Int = imageView.height
-            var h: Int = 240
-
             Picasso.get().load(this.item?.image_1)
                 .error(android.R.drawable.ic_menu_close_clear_cancel)
                 .placeholder(android.R.drawable.ic_menu_report_image)
-                .resize(w, h)
+                .resize(320, 240)
                 .centerCrop()
                 .into(imageView)
         }
@@ -151,7 +148,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
     }
 
     override fun onSkuDetailsResponse(billingResult: BillingResult, skuDetailsList: MutableList<SkuDetails>?) {
-        var s : String = ""
+        var s = ""
 
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
             Log.i("TAG", String.format("onSkuDetailsResponse() response code: %d", billingResult.responseCode))
@@ -159,7 +156,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
             s += "Success onSkuDetailsResponse()\n"
             if ((null != skuDetailsList) && (0 < skuDetailsList.size)) {
                 // it : SkuDetails
-                skuDetailsList.forEach { it ->
+                skuDetailsList.forEach {
                     s += it.originalJson
                     s += "\n"
                 }
