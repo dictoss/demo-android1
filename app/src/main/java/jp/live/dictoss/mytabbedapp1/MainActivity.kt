@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navView.setupWithNavController(nc)
             }
         }
+
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
