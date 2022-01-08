@@ -45,17 +45,9 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView
-        val titleView: TextView
-        val datetimeView: TextView
-
-        init {
-            // Define click listener for the ViewHolder's View.
-            imageView = view.findViewById(R.id.imageViewMyItemListCol)
-            titleView = view.findViewById(R.id.textViewTitleMyItemListCol)
-            datetimeView = view.findViewById(R.id.textViewUpdatedateMyItemListCol)
-        }
-
+        val imageView: ImageView = view.findViewById(R.id.imageViewMyItemListCol)
+        val titleView: TextView = view.findViewById(R.id.textViewTitleMyItemListCol)
+        val datetimeView: TextView = view.findViewById(R.id.textViewUpdatedateMyItemListCol)
     }
 
     // Create new views (invoked by the layout manager)
@@ -86,15 +78,10 @@ class MyItemAdapter (private val dataSet: List<MyItem>, private val context: Con
             viewHolder.imageView.setImageResource(android.R.drawable.stat_notify_sync_noanim)
 
             // 非同期で画像をダウンロードして表示します。
-            //val w: Int = viewHolder.imageView.width
-            val w: Int = 320
-            //val h: Int = viewHolder.imageView.height
-            val h: Int = 240
-
             Picasso.get().load(item.image_1)
                 .error(android.R.drawable.ic_menu_close_clear_cancel)
                 .placeholder(android.R.drawable.ic_menu_report_image)
-                .resize(w, h)
+                .resize(320, 240)
                 .centerCrop()
                 .into(viewHolder.imageView)
         }
