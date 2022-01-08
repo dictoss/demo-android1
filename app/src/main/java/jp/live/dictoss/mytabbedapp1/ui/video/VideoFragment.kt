@@ -20,16 +20,12 @@ class VideoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    companion object {
-        fun newInstance() = VideoFragment()
-    }
-
-    private lateinit var viewModel: VideoViewModel
+    //private var viewModel: VideoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //return inflater.inflate(R.layout.fragment_video, container, false)
 
         videoViewModel =
@@ -44,7 +40,7 @@ class VideoFragment : Fragment() {
         // MPEG-DASH
         //var streamingUri : String = "https://livesim.dashif.org/livesim/chunkdur_1/ato_7/testpic4_8s/Manifest.mpd"
         // HLS
-        var streamingUri : String = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"
+        val streamingUri = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"
 
         player.setMediaItem(MediaItem.fromUri(streamingUri))
         player.prepare()
