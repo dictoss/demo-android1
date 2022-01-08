@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.content.Intent
 import android.net.Uri
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
@@ -16,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Log.i("TAG", "IN onNavigationItemSelected() : R.id.menu_nav_settings")
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
-                drawerLayout.closeDrawer(Gravity.LEFT)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 false
             }
             R.id.menu_nav_blog-> {
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 tabsIntent.intent.setPackage("com.android.chrome")
                 tabsIntent.launchUrl(this, uri)
 
-                drawerLayout.closeDrawer(Gravity.LEFT)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 false
             }
             R.id.menu_nav_hardware-> {
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.setPackage("com.android.chrome")
                 startActivity(intent)
 
-                drawerLayout.closeDrawer(Gravity.LEFT)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 false
             }
             else -> { return false }
