@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import jp.live.dictoss.mytabbedapp1.MainActivity
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentHomeBinding
 
@@ -60,6 +61,10 @@ class HomeFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 webView = binding.homeWebview
                 when (menuItem.itemId) {
+                    android.R.id.home-> {
+                        val activity = requireActivity() as MainActivity
+                        activity.onSupportNavigateUp()
+                    }
                     R.id.menu_back-> {
                         Log.i("TAG", "IN onOptionsItemSelected(): back")
                         if (webView != null) {

@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import jp.live.dictoss.mytabbedapp1.MainActivity
 import jp.live.dictoss.mytabbedapp1.MyItemAdapter
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardBinding
@@ -67,6 +68,10 @@ class DashboardFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
+                    android.R.id.home-> {
+                        val activity = requireActivity() as MainActivity
+                        activity.onSupportNavigateUp()
+                    }
                     R.id.menu_reload-> {
                         Log.i("TAG", "IN onOptionsItemSelected(): reload")
                         dashboardViewModel.beginLoadItems(requireContext())
