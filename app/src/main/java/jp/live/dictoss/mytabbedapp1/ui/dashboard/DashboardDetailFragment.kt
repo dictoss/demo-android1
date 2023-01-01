@@ -18,7 +18,7 @@ import jp.live.dictoss.mytabbedapp1.MyItem
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 
-class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener, SkuDetailsResponseListener {
+class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener {
 
     private lateinit var viewModel: DashboardDetailViewModel
     private var _binding: FragmentDashboardDetailBinding? = null
@@ -138,46 +138,50 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         }
 
         try {
-            val skuList = listOf(this.testProductId)
-            val params = SkuDetailsParams.newBuilder()
-            params.setType(BillingClient.SkuType.INAPP).setSkusList(skuList)
+            val skuList = listOf(
+                QueryProductDetailsParams.Product.newBuilder()
+                    .setProductId(this.testProductId)
+                    .setProductType(BillingClient.ProductType.INAPP)
+                    .build())
+            val params = QueryProductDetailsParams.newBuilder().setProductList(skuList)
 
-            this.billingClient?.querySkuDetailsAsync(params.build(), this)
+            this.billingClient?.queryProductDetailsAsync(params.build()) {
+                billingResult,
+                productDetailsList -> run {
+                    var s = ""
+
+                    if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                        Log.i("TAG", String.format("callback queryProductDetailsAsync() response code: %d", billingResult.responseCode))
+
+                        s += "Success callback queryProductDetailsAsync()\n"
+                        if (0 < productDetailsList.size) {
+                            // it : productDetails
+                            productDetailsList.forEach {
+                                s += it.toString()
+                                s += "\n"
+                            }
+                        } else {
+                            s += "productDetailsList is zero.\n"
+                        }
+                    } else {
+                        val errMsg: String = String.format("callback queryProductDetailsAsync() error code: %d", billingResult.responseCode)
+                        Log.w("TAG", errMsg)
+                        s = errMsg
+                    }
+
+                    this.activity?.runOnUiThread {
+                        val multilineTextView: TextView? = this.view?.findViewById(R.id.fragmentProductInfoEditTextMultiLine)
+                        multilineTextView?.text = s
+                    }
+                }
+            }
         } catch (e: Exception) {
-            Log.e("ERROR", String.format("ERROR on queryProductDetail() : %s ", e.message))
+            Log.e("ERROR", String.format("ERROR on callback queryProductDetailsAsync() : %s ", e.message))
         } finally {
             //
         }
     }
 
     override fun onPurchasesUpdated(billingResult: BillingResult, list: MutableList<Purchase>?) {
-    }
-
-    override fun onSkuDetailsResponse(billingResult: BillingResult, skuDetailsList: MutableList<SkuDetails>?) {
-        var s = ""
-
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-            Log.i("TAG", String.format("onSkuDetailsResponse() response code: %d", billingResult.responseCode))
-
-            s += "Success onSkuDetailsResponse()\n"
-            if ((null != skuDetailsList) && (0 < skuDetailsList.size)) {
-                // it : SkuDetails
-                skuDetailsList.forEach {
-                    s += it.originalJson
-                    s += "\n"
-                }
-            } else {
-                s += "skuDetailsList is zero.\n"
-            }
-        } else {
-            val errMsg: String = String.format("onSkuDetailsResponse() error code: %d", billingResult.responseCode)
-            Log.w("TAG", errMsg)
-            s = errMsg
-        }
-
-        this.activity?.runOnUiThread {
-            val multilineTextView: TextView? = this.view?.findViewById(R.id.fragmentProductInfoEditTextMultiLine)
-            multilineTextView?.text = s
-        }
     }
 }
