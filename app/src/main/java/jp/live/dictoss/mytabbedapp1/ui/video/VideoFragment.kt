@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.ui.StyledPlayerView
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentVideoBinding
 
 class VideoFragment : Fragment() {
@@ -33,7 +33,7 @@ class VideoFragment : Fragment() {
 
         _binding = FragmentVideoBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val playerView: PlayerView = binding.playerView
+        val playerView: StyledPlayerView = binding.playerView
 
         val player = ExoPlayer.Builder(this.requireContext()).build()
 
