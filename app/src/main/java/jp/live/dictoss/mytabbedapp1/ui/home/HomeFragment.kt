@@ -6,7 +6,10 @@ import android.view.*
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import jp.live.dictoss.mytabbedapp1.R
@@ -25,7 +28,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -47,6 +49,48 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                //menuInflater.inflate(R.menu.menu_example, menu)
+                menuInflater.inflate(R.menu.fragment_home_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                webView = binding.homeWebview
+                when (menuItem.itemId) {
+                    R.id.menu_back-> {
+                        Log.i("TAG", "IN onOptionsItemSelected(): back")
+                        if (webView != null) {
+                            webView?.goBack()
+                        }
+                    }
+                    R.id.menu_reload-> {
+                        Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                        if (webView != null) {
+                            webView?.clearCache(true)
+                            webView?.reload()
+                        }
+                    }
+                    R.id.menu_home-> {
+                        Log.i("TAG", "IN onOptionsItemSelected(): home")
+                        if (webView != null) {
+                            webView?.clearCache(true)
+
+                            //val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
+                            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                            val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
+
+                            if (openurl.isNotEmpty()) {
+                                webView?.loadUrl(openurl)
+                            }
+                        }
+                    }
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         // ref: https://memo.abridge-lab.com/?p=150
         if (this.webView == null) {
@@ -80,41 +124,6 @@ class HomeFragment : Fragment() {
             })
         } else {
             Log.i("CONF", "webView already call")
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_back-> {
-                Log.i("TAG", "IN onOptionsItemSelected(): back")
-                if (this.webView != null) {
-                    this.webView?.goBack()
-                }
-                true
-            }
-            R.id.menu_reload-> {
-                Log.i("TAG", "IN onOptionsItemSelected(): reload")
-                if (this.webView != null) {
-                    this.webView?.clearCache(true)
-                    this.webView?.reload()
-                }
-                true
-            }
-            R.id.menu_home-> {
-                Log.i("TAG", "IN onOptionsItemSelected(): home")
-                if (this.webView != null) {
-                    this.webView?.clearCache(true)
-
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.requireContext())
-                    val openurl : String = sharedPreferences.getString("edit_text_preference_webview_openurl", "") ?: ""
-
-                    if (openurl.isNotEmpty()) {
-                        this.webView?.loadUrl(openurl)
-                    }
-                }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
