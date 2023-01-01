@@ -6,6 +6,9 @@ plugins {
 }
 
 android {
+    namespace "jp.live.dictoss.mytabbedapp1"
+    testNamespace "jp.live.dictoss.mytesttabbedapp1"
+
     compileSdk 33
     buildToolsVersion '33.0.1'
 
