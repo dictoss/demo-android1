@@ -1,5 +1,6 @@
 package jp.live.dictoss.mytabbedapp1.ui.dashboard
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -61,7 +62,12 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         super.onViewCreated(view, savedInstanceState)
 
         val bundle: Bundle? = this.arguments
-        this.item = bundle?.getParcelable("item")
+        if (Build.VERSION.SDK_INT >= 33) {
+            this.item = bundle?.getParcelable("item", MyItem::class.java)
+        }
+        else{
+            this.item = bundle?.getParcelable("item")
+        }
 
         val titleTextView: TextView? = view.findViewById(R.id.fragmentDetailTitleTextView)
         titleTextView?.text = this.item?.title
