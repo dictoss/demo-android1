@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +26,6 @@ class DashboardFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -57,6 +59,24 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.fragment_dashboard_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.menu_reload-> {
+                        Log.i("TAG", "IN onOptionsItemSelected(): reload")
+                        dashboardViewModel.beginLoadItems(requireContext())
+                        binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+                    }
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
 
@@ -83,18 +103,6 @@ class DashboardFragment : Fragment() {
         if (dashboardViewModel.items.value == null) {
             dashboardViewModel.beginLoadItems(this.requireContext())
             binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_reload-> {
-                Log.i("TAG", "IN onOptionsItemSelected(): reload")
-                dashboardViewModel.beginLoadItems(this.requireContext())
-                binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
