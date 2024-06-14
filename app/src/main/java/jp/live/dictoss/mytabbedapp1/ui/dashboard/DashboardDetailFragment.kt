@@ -12,13 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
-import com.android.billingclient.api.*
+//import com.android.billingclient.api.*
 import com.squareup.picasso.Picasso
 import jp.live.dictoss.mytabbedapp1.MyItem
 import jp.live.dictoss.mytabbedapp1.R
 import jp.live.dictoss.mytabbedapp1.databinding.FragmentDashboardDetailBinding
 
-class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener {
+//class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdatedListener {
+class DashboardDetailFragment : Fragment(), View.OnClickListener {
 
     private lateinit var viewModel: DashboardDetailViewModel
     private var _binding: FragmentDashboardDetailBinding? = null
@@ -29,7 +30,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
 
     private var item: MyItem? = null
 
-    private var billingClient : BillingClient? = null
+    //private var billingClient : BillingClient? = null
     private val testProductId = "jp.live.dictoss.app_0001"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +100,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         }
 
         // 課金アイテムの取得処理
+        /*
         val billingClient: BillingClient = BillingClient.newBuilder(this.requireContext())
             .setListener(this)
             .enablePendingPurchases()
@@ -119,6 +121,7 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         })
 
         this.billingClient = billingClient
+         */
     }
 
     override fun onClick(view: View) {
@@ -133,10 +136,11 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
 
     private fun querySkuDetails()
     {
-        if (this.billingClient == null){
-            return
-        }
+        //if (this.billingClient == null){
+        //    return
+        //}
 
+        /*
         try {
             val skuList = listOf(
                 QueryProductDetailsParams.Product.newBuilder()
@@ -180,8 +184,9 @@ class DashboardDetailFragment : Fragment(), View.OnClickListener, PurchasesUpdat
         } finally {
             //
         }
+         */
     }
 
-    override fun onPurchasesUpdated(billingResult: BillingResult, list: MutableList<Purchase>?) {
-    }
+    //override fun onPurchasesUpdated(billingResult: BillingResult, list: MutableList<Purchase>?) {
+    //}
 }
